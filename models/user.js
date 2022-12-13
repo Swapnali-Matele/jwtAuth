@@ -19,11 +19,11 @@ const userSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
-    // password_confirmation:{
-    //     type: String,
-    //     required: true,
-    //     trim: true,
-    // },
+    password_confirmation:{
+        type: String,
+        required: true,
+        trim: true,
+    },
     tc:{
         type: Boolean,
         required: true,
@@ -34,6 +34,7 @@ const userSchema = new mongoose.Schema({
 //create model by using schema
 
 const UserModel = mongoose.model('user', userSchema);
+
 
 //export default UserModel;
 module.exports = UserModel

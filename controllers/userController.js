@@ -94,7 +94,7 @@ const userRegistartion = async (req, res) => {
  const changeUserPassword = async (req, res)=>{
     const password = req.body.password
     const password_confirmation = req.body.password_confirmation
-    //console.log(req.user)
+    console.log(req.user)
     console.log(password, password_confirmation)
     if(password && password_confirmation){
         if(password !== password_confirmation){
@@ -111,8 +111,20 @@ const userRegistartion = async (req, res) => {
         
         
         //To save new change password into mongo DB
-        await UserModel.findByIdAndUpdate(req.user._id,{$set:{password:password}} )
+        //const user = await UserModel.findOne({ _id: _id });
+         var userPassReset = await UserModel.findOne({_id:req.user[0]._id})
+         console.log(req.user[0]._id)
+         try{
+         console.log(userPassReset)
+         //userPassReset.password = password
+         userPassReset.password_confirmation = password
+         console.log(userPassReset.password_confirmation)
+         console.log(userPassReset)
+         await UserModel.findByIdAndUpdate(req.user[0]._id, userPassReset, { new: true, runValidators:true})
         res.send({'status': 'success', 'msg':'Password change successfully'}) 
+         }catch (err){
+          console.log(err)
+         }
             
       }
     }else{

@@ -21,7 +21,7 @@ router.post('/reset-pass/:id/:token',userPasswordReset)
 //route level middleware - to protect level routes
 router.use('/changepassword', checkUserAuth)
 
-// protected route - login ke baad acess kr sakte hai
+// protected route - login ke baad acess kr sakte hai   
 router.post('/changepassword', changeUserPassword)
 router.patch('/changepassword', changeUserPassword)
 router.post('/loggeduser', loggedUser)

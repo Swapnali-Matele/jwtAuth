@@ -14,10 +14,11 @@ var checkUserAuth = async (req, res, next)=>{
              
             //verify token
             const {userID} = jwt.verify(token, process.env.JWT_SECRET_KEY);
-            console.log(userID + "ssss");
+            //console.log(userID + "ssss");
             //get user from token
             req.user = await UserModel.find({'_id': userID})
             console.log(req.user)
+            //console.log(req.user)
             //for next middleware
             next();
 
